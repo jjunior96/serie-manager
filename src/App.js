@@ -1,35 +1,31 @@
-import React, { useState } from 'react';
-import { 
-  Navbar,
-  NavbarBrand,
-  Collapse,
-  Nav,
-  NavItem,
-  NavLink,
-  NavbarToggler
-} from 'reactstrap';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-function App() {
-  const [ open, setOpen ] = useState(false);
+import Header from './components/Header'
 
-  const handleToggle = () => {
-    setOpen(!open);
-  }
-
+const Home = () => {
   return (
-    <div>
-      <Navbar color='light' light expand='md' >
-        <NavbarBrand>Minhas series</NavbarBrand>
-        <NavbarToggler onClick={handleToggle}/>
-        <Collapse isOpen={open} navbar >
-          <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavLink href="/">Generos</NavLink>
-            </NavItem>
-          </Nav>
-        </Collapse>
-      </Navbar>
-    </div>
+    <h1>Home</h1>
+  )
+}
+
+const Genres = () => {
+  return (
+    <h1>Generos</h1>
+  )
+}
+
+function App() {  
+  return (
+    <Router >
+      <Header />
+      {/* Retorna apenas uma unica pagina por rota */}
+      <Switch>
+        {/* Exact = retorna o componente onde é exatamente esse path */}
+        <Route path='/' exact component={Home} />
+        <Route path='/genres' component={Genres} />
+      </Switch>
+    </Router>
   );
 }
 
